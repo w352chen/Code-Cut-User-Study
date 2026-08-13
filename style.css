@@ -1,0 +1,293 @@
+/* ------------------------------
+   Basic page setup
+------------------------------ */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  background: #f5f6f8;
+}
+
+
+/* ------------------------------
+   Study workspace
+------------------------------ */
+
+.study-container {
+  position: relative;
+
+  width: 100vw;
+  height: 100vh;
+}
+
+
+/* ------------------------------
+   Code Cut iframe
+
+   This remains unchanged when
+   participants move between tasks.
+------------------------------ */
+
+#codecut-frame {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  border: none;
+
+  background: white;
+}
+
+
+/* ------------------------------
+   Floating task card
+------------------------------ */
+
+.task-card {
+  position: absolute;
+
+  right: 24px;
+  bottom: 24px;
+
+  width: 340px;
+  max-width: calc(100vw - 48px);
+
+  padding: 18px 18px 16px;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  border: 1px solid #dce1e8;
+  border-radius: 14px;
+
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.10),
+    0 2px 6px rgba(0, 0, 0, 0.04);
+
+  z-index: 1000;
+
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+
+/*
+  Animation applies ONLY to the task card.
+  The Code Cut interface does not move.
+*/
+
+.task-card.changing {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+
+/* ------------------------------
+   Task header
+------------------------------ */
+
+.task-header {
+  margin-bottom: 12px;
+}
+
+#task-progress {
+  color: #748096;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* ------------------------------
+   Task content
+------------------------------ */
+
+.task-card h2 {
+  margin: 0 0 10px;
+
+  color: #252a34;
+
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.task-card p {
+  margin: 0;
+
+  color: #4d5666;
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* ------------------------------
+   Buttons
+------------------------------ */
+
+.task-footer {
+  display: flex;
+
+  justify-content: flex-end;
+  align-items: center;
+
+  gap: 8px;
+
+  margin-top: 18px;
+}
+
+.task-footer button {
+  min-height: 36px;
+
+  padding: 0 14px;
+
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 120ms ease,
+    border 120ms ease,
+    opacity 120ms ease;
+}
+
+
+/* Back button */
+
+.secondary-button {
+  color: #4b5563;
+
+  background: #ffffff;
+
+  border: 1px solid #d1d5db;
+}
+
+.secondary-button:hover {
+  background: #f5f5f5;
+}
+
+
+/* Next button */
+
+.primary-button {
+  color: white;
+
+  background: #2563eb;
+
+  border: 1px solid #2563eb;
+}
+
+.primary-button:hover {
+  background: #1d4ed8;
+}
+
+
+/* Disabled state */
+
+button:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+
+/* ------------------------------
+   Small screens
+------------------------------ */
+
+@media (max-width: 600px) {
+
+  .task-card {
+    right: 12px;
+    bottom: 12px;
+
+    width: calc(100vw - 24px);
+  }
+
+}
+
+
+/* ------------------------------
+   Timed study task card
+------------------------------ */
+
+.study-task-card {
+  width: 400px;
+  max-height: calc(100vh - 48px);
+  overflow: auto;
+}
+
+.study-task-card p + p {
+  margin-top: 10px;
+}
+
+#task-app-name {
+  display: block;
+  margin-bottom: 4px;
+  color: #252a34;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.continue-hint {
+  margin-top: 14px !important;
+  color: #748096 !important;
+  font-size: 13px !important;
+}
+
+.condition-note {
+  margin: 0 0 12px;
+  color: #748096;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* ------------------------------
+   Conventional coding agent task
+------------------------------ */
+
+body.conventional-study {
+  overflow: auto;
+  height: auto;
+  min-height: 100%;
+}
+
+.conventional-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 40px 24px;
+}
+
+.conventional-layout .task-card {
+  position: static;
+  width: 560px;
+  max-width: 100%;
+}

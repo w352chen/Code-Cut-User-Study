@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Code Cut User Study</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: #f9f9f9;
+      margin: 0;
+    }
+
+    h1 { margin: 32px 0; }
+
+    .participant-form {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+      text-align: center;
+      min-width: 400px;
+    }
+
+    .form-group { margin-bottom: 20px; }
+
+    label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
+
+    input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    input[type="text"]:focus, input[type="number"]:focus { outline: none; border-color: #007BFF; }
+
+    .btn {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.2s;
+    }
+
+    .btn:hover { background-color: #0056b3; }
+    .btn:disabled { background-color: #ccc; cursor: not-allowed; }
+
+    .study-links { display: none; }
+    .study-links.show { display: block; }
+
+    .step-note {
+      text-align: center;
+      color: #555;
+      margin: 0 0 16px;
+      font-size: 15px;
+    }
+
+    ol { list-style: none; padding: 0; margin: 0; }
+    li { margin: 15px 0; list-style: none; }
+
+    a {
+      text-decoration: none;
+      color: #007BFF;
+      font-size: 18px;
+      transition: all 0.2s ease;
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 6px;
+      background-color: #f8f9fa;
+      border: 1px solid #e9ecef;
+      min-width: 420px;
+      text-align: left;
+    }
+
+    a:hover {
+      color: #0056b3;
+      background-color: #e7f3ff;
+      border-color: #007BFF;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+    }
+
+    .participant-info {
+      background: #e8f5e8;
+      border: 1px solid #4caf50;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .change-id { background: none; border: none; color: #007BFF; cursor: pointer; text-decoration: underline; font-size: 14px; }
+
+    .csv-section {
+      margin-top: 28px;
+      padding: 16px;
+      background: white;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .csv-section p {
+      margin: 0 0 12px;
+      color: #555;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Welcome to the AI-Assisted App Development Study</h1>
+
+  <div id="participantForm" class="participant-form">
+    <div class="form-group">
+      <input type="number" id="participantId" placeholder="Enter your participant ID" required>
+    </div>
+    <button class="btn" id="continueBtn">Continue</button>
+  </div>
+
+  <div id="studyLinks" class="study-links">
+    <div class="participant-info">
+      <strong>Participant ID:</strong> <span id="displayParticipantId"></span><br>
+      <button class="change-id" onclick="changeParticipantId()">Change ID</button>
+    </div>
+
+    <p class="step-note">Please complete the steps in the order shown.</p>
+    <ol id="taskList"></ol>
+
+    <div id="csvSection" class="csv-section">
+      <p id="csvStatus"></p>
+      <button class="btn" id="downloadCsvBtn" disabled>Download timing CSV</button>
+    </div>
+  </div>
+
+  <script src="study-task.js"></script>
+  <script>
+  /*
+    Fill in the study links here.
+    Leave a value as '' until you have the URL.
+  */
+  const LINKS = {
+    preQuestionnaire: 'https://uwaterloo.ca1.qualtrics.com/jfe/form/SV_8GlpquImFklLETs',
+    tutorial: 'tutorial.html',
+    task1CodeCut: 'code-cut-task.html?task=focus',
+    task2CodeCut: 'code-cut-task.html?task=expense',
+    task1Conventional: 'conventional-task.html?task=focus',
+    task2Conventional: 'conventional-task.html?task=expense',
+    surveyCodeCut: 'https://uwaterloo.ca1.qualtrics.com/jfe/form/SV_0jOlA9CzRB7rAKW',
+    surveyConventional: 'https://uwaterloo.ca1.qualtrics.com/jfe/form/SV_00aCm4pshyZROQu',
+  };
+
+  const TOOL_LABELS = {
+    code_cut: 'Code Cut',
+    conventional: 'Conventional coding agent',
+  };
+
+  const TASK_LABELS = {
+    task1: 'Task 1 (Focus timer)',
+    task2: 'Task 2 (Expense-splitting)',
+  };
+
+  /*
+    Four counterbalanced orders, repeating every 4 participant IDs.
+
+    ID 1, 5, 9, ... : Task 1 with Code Cut, then Task 2 with Conventional coding agent
+    ID 2, 6, 10, ...: Task 1 with Conventional coding agent, then Task 2 with Code Cut
+    ID 3, 7, 11, ...: Task 2 with Code Cut, then Task 1 with Conventional coding agent
+    ID 4, 8, 12, ...: Task 2 with Conventional coding agent, then Task 1 with Code Cut
+
+    Pre-Questionnaire and the Code Cut tutorial stay first for everyone.
+  */
+
+  function balancedLatinSquare(array, participantId) {
+    const result = [];
+    // Based on "Bradley, J. V. Complete counterbalancing of immediate sequential effects in a Latin square design. J. Amer. Statist. Ass., 1958, 53, 525-528."
+    for (let i = 0, j = 0, h = 0; i < array.length; ++i) {
+      let val = 0;
+      if (i < 2 || i % 2 != 0) {
+        val = j++;
+      } else {
+        val = array.length - h - 1;
+        ++h;
+      }
+
+      const idx = (val + participantId) % array.length;
+      result.push(array[idx]);
+    }
+
+    if (array.length % 2 != 0 && participantId % 2 != 0) {
+      result.reverse();
+    }
+
+    return result;
+  }
+
+  function getCounterbalancedSessions(participantId) {
+    const n = Number(participantId);
+    const squareIndex = ((Math.floor(n) - 1) % 4 + 4) % 4;
+    const toolOrder = balancedLatinSquare(['code_cut', 'conventional'], squareIndex % 2);
+    const taskOrder = balancedLatinSquare(['task1', 'task2'], Math.floor(squareIndex / 2));
+
+    return [
+      { tool: toolOrder[0], task: taskOrder[0] },
+      { tool: toolOrder[1], task: taskOrder[1] },
+    ];
+  }
+
+  function taskHref(tool, task) {
+    if (tool === 'code_cut' && task === 'task1') return LINKS.task1CodeCut;
+    if (tool === 'code_cut' && task === 'task2') return LINKS.task2CodeCut;
+    if (tool === 'conventional' && task === 'task1') return LINKS.task1Conventional;
+    if (tool === 'conventional' && task === 'task2') return LINKS.task2Conventional;
+    return '';
+  }
+
+  function surveyHref(tool) {
+    return tool === 'code_cut' ? LINKS.surveyCodeCut : LINKS.surveyConventional;
+  }
+
+  function hrefOrPlaceholder(href) {
+    return href || '#';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const storedId = localStorage.getItem('participant_id');
+    const storedSessions = localStorage.getItem('study_sessions');
+    if (storedId && storedSessions) {
+      showStudyLinks(storedId, JSON.parse(storedSessions));
+    }
+
+    document.getElementById('continueBtn').addEventListener('click', setParticipantId);
+
+    document.getElementById('participantId').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        setParticipantId();
+      }
+    });
+
+    document.getElementById('downloadCsvBtn').addEventListener('click', () => {
+      window.downloadStudyCsv();
+    });
+
+    window.addEventListener('storage', updateCsvSection);
+    document.addEventListener('visibilitychange', () => {
+      if (document.visibilityState === 'visible') {
+        updateCsvSection();
+      }
+    });
+  });
+
+  function setParticipantId() {
+    try {
+      const idEl = document.getElementById('participantId');
+      const participantId = (idEl.value || '').trim();
+
+      if (!participantId) {
+        alert('Please enter a participant ID');
+        return;
+      }
+
+      const n = Number(participantId);
+      if (!Number.isFinite(n) || n < 1) {
+        alert('Please enter a participant ID that is 1 or greater');
+        return;
+      }
+
+      const sessions = getCounterbalancedSessions(participantId);
+
+      ['participant_id', 'participant_start_time', 'study_sessions', 'task_timings'].forEach((key) => {
+        localStorage.removeItem(key);
+      });
+
+      localStorage.setItem('participant_id', participantId);
+      localStorage.setItem('study_sessions', JSON.stringify(sessions));
+      localStorage.setItem('participant_start_time', new Date().toISOString());
+
+      showStudyLinks(participantId, sessions);
+    } catch (err) {
+      console.error('Continue failed:', err);
+      alert('An error occurred. Please check the console for details.');
+    }
+  }
+
+  function showStudyLinks(participantId, sessions) {
+    document.getElementById('participantForm').style.display = 'none';
+    document.getElementById('studyLinks').classList.add('show');
+    document.getElementById('displayParticipantId').textContent = participantId;
+    generateTaskList(sessions);
+    updateCsvSection();
+  }
+
+  function updateCsvSection() {
+    const status = document.getElementById('csvStatus');
+    const btn = document.getElementById('downloadCsvBtn');
+    const n = window.getCompletedTaskCount ? window.getCompletedTaskCount() : 0;
+    btn.disabled = n < 2;
+    status.textContent = n >= 2
+      ? 'Both tasks are complete. You can download the timing CSV.'
+      : `The timing CSV is available after both tasks are complete. (${n} of 2 recorded)`;
+  }
+
+  function generateTaskList(sessions) {
+    const taskList = document.getElementById('taskList');
+    const first = sessions[0];
+    const second = sessions[1];
+
+    const items = [
+      {
+        label: '1. Pre-Questionnaire',
+        href: LINKS.preQuestionnaire,
+      },
+      {
+        label: '2. Tutorial for Code Cut',
+        href: LINKS.tutorial,
+      },
+      {
+        label: `3. ${TASK_LABELS[first.task]} with ${TOOL_LABELS[first.tool]}`,
+        href: taskHref(first.tool, first.task),
+      },
+      {
+        label: `4. Survey for ${TOOL_LABELS[first.tool]}`,
+        href: surveyHref(first.tool),
+      },
+      {
+        label: `5. ${TASK_LABELS[second.task]} with ${TOOL_LABELS[second.tool]}`,
+        href: taskHref(second.tool, second.task),
+      },
+      {
+        label: `6. Survey for ${TOOL_LABELS[second.tool]}`,
+        href: surveyHref(second.tool),
+      },
+    ];
+
+    taskList.innerHTML = items.map((item) => {
+      return `<li><a href="${hrefOrPlaceholder(item.href)}" target="_blank">${item.label}</a></li>`;
+    }).join('');
+  }
+
+  function changeParticipantId() {
+    document.getElementById('participantForm').style.display = 'block';
+    document.getElementById('studyLinks').classList.remove('show');
+    document.getElementById('participantId').value = '';
+    document.getElementById('participantId').focus();
+  }
+  </script>
+
+</body>
+</html>

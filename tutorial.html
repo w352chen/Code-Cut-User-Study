@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Code Cut User Study</title>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <main class="study-container">
+
+    <!--
+      Main Code Cut interface.
+
+      IMPORTANT:
+      Do not modify the src when switching tasks.
+      This iframe should remain mounted throughout the study.
+    -->
+    <iframe
+      id="codecut-frame"
+      src="https://code-cut-frontend.onrender.com/"
+      title="Code Cut"
+      allow="clipboard-read; clipboard-write"
+    ></iframe>
+
+
+    <!-- Floating study task card -->
+    <section
+      id="task-card"
+      class="task-card"
+      aria-live="polite"
+    >
+
+      <div class="task-header">
+        <span id="task-progress">
+          Tutorial 1 of 16
+        </span>
+      </div>
+
+      <h2 id="task-title">
+        Create a New Project
+      </h2>
+
+      <div id="task-description">
+        <p>Start by setting up your project:</p>
+
+        <ol>
+          <li>Enter a <strong>project name</strong>.</li>
+          <li>
+            Choose where you would like to <strong>store the app</strong> on your computer.
+          </li>
+          <li>
+            Briefly describe <strong>what you would like to build</strong>.
+          </li>
+        </ol>
+
+        <p>
+          When you are ready, click <strong>Create</strong>.
+          Code Cut will use your description to generate an initial development plan.
+        </p>
+      </div>
+
+
+      <div class="task-footer">
+
+        <button
+          id="back-button"
+          class="secondary-button"
+          type="button"
+        >
+          Back
+        </button>
+
+        <button
+          id="next-button"
+          class="primary-button"
+          type="button"
+        >
+          Next →
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>

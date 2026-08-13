@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conventional Coding Agent Task</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body
+  class="conventional-study"
+  data-study-task="true"
+  data-condition="conventional"
+>
+
+  <main class="conventional-layout">
+
+    <section
+      id="task-card"
+      class="task-card study-task-card"
+      aria-live="polite"
+    >
+
+      <div class="task-header">
+        <span id="task-app-name"></span>
+        <span id="task-progress">Step 1 of 6</span>
+      </div>
+
+      <p id="condition-note" class="condition-note"></p>
+
+      <h2 id="task-title"></h2>
+
+      <div id="task-description"></div>
+
+      <p id="task-continue-hint" class="continue-hint">
+        When you have finished this step, click Continue.
+      </p>
+
+      <div class="task-footer">
+        <button
+          id="home-button"
+          class="secondary-button"
+          type="button"
+          hidden
+        >
+          Back to study page
+        </button>
+
+        <button
+          id="download-button"
+          class="primary-button"
+          type="button"
+          hidden
+        >
+          Download timing CSV
+        </button>
+
+        <button
+          id="next-button"
+          class="primary-button"
+          type="button"
+        >
+          Continue
+        </button>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="study-task.js"></script>
+
+</body>
+</html>
