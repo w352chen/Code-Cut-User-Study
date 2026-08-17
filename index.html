@@ -163,12 +163,12 @@
 
   const TOOL_LABELS = {
     code_cut: 'Code Cut',
-    conventional: 'Conventional coding agent',
+    conventional: 'conventional coding agent',
   };
 
   const TASK_LABELS = {
-    task1: 'Task 1 (Focus timer)',
-    task2: 'Task 2 (Expense-splitting)',
+    task1: '(Focus timer)',
+    task2: '(Expense-splitting)',
   };
 
   /*
@@ -179,7 +179,8 @@
     ID 3, 7, 11, ...: Task 2 with Code Cut, then Task 1 with Conventional coding agent
     ID 4, 8, 12, ...: Task 2 with Conventional coding agent, then Task 1 with Code Cut
 
-    Pre-Questionnaire and the Code Cut tutorial stay first for everyone.
+    Pre-Questionnaire stays first for everyone.
+    The Code Cut tutorial is inserted immediately before the Code Cut task.
   */
 
   function balancedLatinSquare(array, participantId) {
@@ -311,40 +312,43 @@
       : `The timing CSV is available after both tasks are complete. (${n} of 2 recorded)`;
   }
 
-  function generateTaskList(sessions) {
-    const taskList = document.getElementById('taskList');
-    const first = sessions[0];
-    const second = sessions[1];
-
+  function buildStudySteps(sessions) {
     const items = [
       {
-        label: '1. Pre-Questionnaire',
+        label: 'Pre-Questionnaire',
         href: LINKS.preQuestionnaire,
-      },
-      {
-        label: '2. Tutorial for Code Cut',
-        href: LINKS.tutorial,
-      },
-      {
-        label: `3. ${TASK_LABELS[first.task]} with ${TOOL_LABELS[first.tool]}`,
-        href: taskHref(first.tool, first.task),
-      },
-      {
-        label: `4. Survey for ${TOOL_LABELS[first.tool]}`,
-        href: surveyHref(first.tool),
-      },
-      {
-        label: `5. ${TASK_LABELS[second.task]} with ${TOOL_LABELS[second.tool]}`,
-        href: taskHref(second.tool, second.task),
-      },
-      {
-        label: `6. Survey for ${TOOL_LABELS[second.tool]}`,
-        href: surveyHref(second.tool),
       },
     ];
 
-    taskList.innerHTML = items.map((item) => {
-      return `<li><a href="${hrefOrPlaceholder(item.href)}" target="_blank">${item.label}</a></li>`;
+    sessions.forEach((session) => {
+      if (session.tool === 'code_cut') {
+        items.push({
+          label: 'Tutorial for Code Cut',
+          href: LINKS.tutorial,
+        });
+      }
+
+      items.push({
+        label: `${TASK_LABELS[session.task]} with ${TOOL_LABELS[session.tool]}`,
+        href: taskHref(session.tool, session.task),
+      });
+
+      items.push({
+        label: `Survey for ${TOOL_LABELS[session.tool]}`,
+        href: surveyHref(session.tool),
+      });
+    });
+
+    return items;
+  }
+
+  function generateTaskList(sessions) {
+    const taskList = document.getElementById('taskList');
+    const items = buildStudySteps(sessions);
+
+    taskList.innerHTML = items.map((item, index) => {
+      const label = `${index + 1}. ${item.label}`;
+      return `<li><a href="${hrefOrPlaceholder(item.href)}" target="_blank">${label}</a></li>`;
     }).join('');
   }
 

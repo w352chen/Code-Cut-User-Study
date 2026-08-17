@@ -43,7 +43,7 @@ const STEP_TITLES = [
 ];
 
 const STEP_BODIES = [
-  '<p>Design and build the app with approximately five features that you think would make it useful.</p>',
+  '<p>Design and build the app with <strong>five</strong> features that you think would make it useful.</p>',
   '<p>Choose one feature you have built that seems more complicated than necessary. Simplify it.</p>',
   '<p>Choose another feature that feels too limited. Expand its functionality.</p>',
   '<p>Remove the second feature you built from the application.</p>',
