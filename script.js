@@ -89,7 +89,7 @@ const tasks = [
   },
 
   {
-  title: "Preview a Clip",
+  title: "Plan a Clip",
   description: `
     <p>
       <strong>Plan</strong> lets you review how Code Cut plans to implement a feature
@@ -109,17 +109,17 @@ const tasks = [
   },
 
   {
-  title: "Preview Multiple Clips",
+  title: "Plan Multiple Clips",
   description: `
     <p>
-      You can also preview multiple clips together to see how Code Cut plans to
+      You can also plan multiple clips together to see how Code Cut plans to
       implement them as a group.
     </p>
 
     <p>
       Click the <strong>{ }</strong> button. Put the <strong>{</strong> to the
       left edge of the second clip, and move the <strong>}</strong> to the
-      right edge of the third clip. This defines the range you want to preview.
+      right edge of the third clip. This defines the range you want to plan.
     </p>
 
     <p>
@@ -134,7 +134,7 @@ const tasks = [
   title: "Clear the Current Range",
   description: `
     <p>
-      To clear the current preview range, click the <strong>Range</strong> indicator
+      To clear the current plan range, click the <strong>Range</strong> indicator
       in the toolbar, then click <strong>×</strong>.
     </p>
 
@@ -161,7 +161,7 @@ const tasks = [
 
     <p>
       Click <strong>Build</strong> to build the three clips based on the
-      implementation plan you just previewed.
+      implementation plan you just did.
     </p>
   `
 },
