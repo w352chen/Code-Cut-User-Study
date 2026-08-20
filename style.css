@@ -62,7 +62,242 @@ body {
 
 
 /* ------------------------------
-   Floating task card
+   Study task stack (two-card layout)
+------------------------------ */
+
+.study-task-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.study-task-stack--overlay {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1000;
+  width: 440px;
+  max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+}
+
+.study-panel {
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow:
+    0 1px 3px rgba(15, 23, 42, 0.06),
+    0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
+.panel-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.panel-label span:first-child {
+  flex-shrink: 0;
+  color: #2563eb;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.panel-label-line {
+  flex: 1;
+  height: 1px;
+  background: #dbeafe;
+}
+
+#task-heading {
+  margin: 0 0 10px;
+  color: #111827;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.task-intro-toggle {
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0 12px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #2563eb;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+}
+
+.task-intro-toggle:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.task-intro-collapsible {
+  margin-top: 4px;
+}
+
+#task-intro p {
+  margin: 0;
+  color: #374151;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+#task-intro p + p {
+  margin-top: 12px;
+}
+
+.condition-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 12px 0 0;
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.status-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+.step-meta {
+  margin-bottom: 16px;
+}
+
+#task-progress {
+  color: #6b7280;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.step-card #task-title {
+  margin: 0 0 12px;
+  color: #111827;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.step-card #task-description p {
+  margin: 0;
+  color: #374151;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.continue-hint {
+  margin-top: 18px !important;
+  color: #dc2626 !important;
+  font-size: 14px !important;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.step-confirm-block {
+  margin-top: 14px;
+  padding: 16px 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.step-confirm-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #374151;
+  font-size: 15px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.step-confirm-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.step-card .task-footer {
+  margin-top: 20px;
+}
+
+.step-card #confirm-button.primary-button:not(:disabled) {
+  min-width: 108px;
+  background: #94a3b8;
+  border-color: #94a3b8;
+}
+
+.step-card #confirm-button.primary-button:not(:disabled):hover {
+  background: #64748b;
+  border-color: #64748b;
+}
+
+.step-card.changing {
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.study-task-stack--hidden {
+  display: none;
+}
+
+.show-task-panel-btn {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  z-index: 1001;
+  min-height: 40px;
+  padding: 0 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #334155;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow:
+    0 1px 3px rgba(15, 23, 42, 0.08),
+    0 6px 18px rgba(15, 23, 42, 0.08);
+}
+
+.show-task-panel-btn:hover {
+  background: #f8fafc;
+}
+
+.step-card .task-footer {
+  flex-wrap: wrap;
+}
+
+.hide-task-panel-btn {
+  margin-right: auto;
+}
+
+
+/* ------------------------------
+   Floating task card (tutorial)
 ------------------------------ */
 
 .task-card {
@@ -112,9 +347,8 @@ body {
   margin-bottom: 12px;
 }
 
-#task-progress {
+.task-card #task-progress {
   color: #748096;
-
   font-size: 13px;
   font-weight: 600;
 }
@@ -229,42 +463,25 @@ button:disabled {
     width: calc(100vw - 24px);
   }
 
-}
+  .study-task-stack--overlay {
+    right: 12px;
+    bottom: 12px;
+    width: calc(100vw - 24px);
+  }
 
+  .show-task-panel-btn {
+    right: 12px;
+    bottom: 12px;
+  }
 
-/* ------------------------------
-   Timed study task card
------------------------------- */
+  .study-panel {
+    padding: 20px;
+  }
 
-.study-task-card {
-  width: 400px;
-  max-height: calc(100vh - 48px);
-  overflow: auto;
-}
+  #task-heading {
+    font-size: 20px;
+  }
 
-.study-task-card p + p {
-  margin-top: 10px;
-}
-
-#task-app-name {
-  display: block;
-  margin-bottom: 4px;
-  color: #252a34;
-  font-size: 13px;
-  font-weight: 650;
-}
-
-.continue-hint {
-  margin-top: 14px !important;
-  color: #748096 !important;
-  font-size: 13px !important;
-}
-
-.condition-note {
-  margin: 0 0 12px;
-  color: #748096;
-  font-size: 13px;
-  line-height: 1.5;
 }
 
 
@@ -276,6 +493,7 @@ body.conventional-study {
   overflow: auto;
   height: auto;
   min-height: 100%;
+  background: #f3f4f6;
 }
 
 .conventional-layout {
@@ -286,8 +504,7 @@ body.conventional-study {
   padding: 40px 24px;
 }
 
-.conventional-layout .task-card {
-  position: static;
-  width: 560px;
-  max-width: 100%;
+.conventional-layout .study-task-stack {
+  width: 100%;
+  max-width: 640px;
 }

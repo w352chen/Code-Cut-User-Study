@@ -2,7 +2,7 @@
   Timed study tasks.
 
   Each task has 6 steps shown one at a time.
-  Time is recorded when the participant clicks Continue, in minutes.
+  Time is recorded when the participant clicks Confirm, in minutes.
   The Code Cut iframe is never reloaded from this file.
 */
 
@@ -23,7 +23,7 @@ const STUDY_TASKS = {
   expense: {
     id: 'expense',
     csvName: 'expense-splitting',
-    heading: 'Build an expense-splitting app for a small group',
+    heading: 'Build an expense-splitting app for a group of 3 - 8 people',
     blurb: 'An expense-splitting app helps a group keep track of shared expenses and understand how costs should be divided among group members.',
   },
 };
@@ -34,7 +34,7 @@ const SESSION_TASK_IDS = {
 };
 
 const STEP_TITLES = [
-  'Build about five features',
+  'Build five features.',
   'Simplify a feature',
   'Expand a feature',
   'Remove a feature',
@@ -43,7 +43,7 @@ const STEP_TITLES = [
 ];
 
 const STEP_BODIES = [
-  '<p>Design and build the app with <strong>five</strong> features that you think would make it useful.</p>',
+  '<p>Design and build the app with <strong>five</strong> features that you think would make it useful. A <strong>feature</strong> is a distinct user-facing capability that supports a meaningful user goal. A feature may include multiple interface components or actions; individual buttons, fields, or minor interactions do not count as separate features.</p>',
   '<p>Choose one feature you have built that seems more complicated than necessary. Simplify it.</p>',
   '<p>Choose another feature that feels too limited. Expand its functionality.</p>',
   '<p>Remove the second feature you built from the application.</p>',
@@ -51,13 +51,18 @@ const STEP_BODIES = [
   '<p>You want to take a closer look at how one of the features appears in the application. Choose one feature and inspect its interface in more detail.</p>',
 ];
 
+function techNoteText(condition) {
+  if (condition === 'conventional') {
+    return 'Please implement this app using <strong>HTML, CSS, and JavaScript</strong>. Feel free to organize the implementation across multiple files as needed.';
+  }
+  return 'Please build this app using <strong>HTML, CSS, and JavaScript</strong>. Code Cut uses this stack.';
+}
+
 function stepsFor(task) {
-  return STEP_TITLES.map((title, i) => {
-    const body = i === 0
-      ? `<p>${task.blurb}</p>${STEP_BODIES[i]}`
-      : STEP_BODIES[i];
-    return { title, description: body };
-  });
+  return STEP_TITLES.map((title, i) => ({
+    title,
+    description: STEP_BODIES[i],
+  }));
 }
 
 function loadTimings() {
@@ -183,16 +188,31 @@ function initStudyTask() {
   const task = STUDY_TASKS[taskId];
   const steps = task ? stepsFor(task) : [];
 
-  const taskCard = document.getElementById('task-card');
-  const appName = document.getElementById('task-app-name');
+  const taskBriefCard = document.getElementById('task-brief-card');
+  const stepCard = document.getElementById('step-card');
+  const studyTaskStack = document.getElementById('study-task-stack')
+    || document.querySelector('.study-task-stack');
+  const taskHeading = document.getElementById('task-heading');
+  const taskIntro = document.getElementById('task-intro');
+  const taskIntroToggle = document.getElementById('task-intro-toggle');
+  const taskBlurb = document.getElementById('task-blurb');
+  const taskTechNote = document.getElementById('task-tech-note');
+  const stepMeta = document.querySelector('.step-meta');
   const taskProgress = document.getElementById('task-progress');
   const taskTitle = document.getElementById('task-title');
   const taskDescription = document.getElementById('task-description');
   const continueHint = document.getElementById('task-continue-hint');
+  const stepConfirmBlock = document.getElementById('step-confirm-block');
+  const stepFinishedCheckbox = document.getElementById('step-finished-checkbox');
   const conditionNote = document.getElementById('condition-note');
-  const nextButton = document.getElementById('next-button');
+  const conditionNoteText = document.querySelector('.condition-note-text');
+  const confirmButton = document.getElementById('confirm-button');
   const homeButton = document.getElementById('home-button');
   const downloadButton = document.getElementById('download-button');
+  const hideTaskPanelBtn = document.getElementById('hide-task-panel-btn');
+  const showTaskPanelBtn = document.getElementById('show-task-panel-btn');
+
+  let introExpanded = false;
 
   homeButton.addEventListener('click', () => {
     window.location.href = 'index.html';
@@ -200,12 +220,61 @@ function initStudyTask() {
 
   downloadButton.addEventListener('click', downloadStudyCsv);
 
+  function setStepControlsVisible(visible) {
+    if (stepMeta) {
+      stepMeta.hidden = !visible;
+    }
+    if (taskTitle) {
+      taskTitle.hidden = !visible;
+    }
+    continueHint.hidden = !visible;
+    if (stepConfirmBlock) {
+      stepConfirmBlock.hidden = !visible;
+    }
+    confirmButton.hidden = !visible;
+    if (hideTaskPanelBtn) {
+      hideTaskPanelBtn.hidden = !visible;
+    }
+  }
+
+  function setIntroExpanded(expanded) {
+    introExpanded = expanded;
+    if (!taskIntro || !taskIntroToggle) {
+      return;
+    }
+    taskIntro.hidden = !expanded;
+    taskIntroToggle.setAttribute('aria-expanded', String(expanded));
+    taskIntroToggle.textContent = expanded ? 'Hide task details' : 'Show task details';
+  }
+
+  function defaultIntroExpandedForStep(stepIndex) {
+    return stepIndex === 0;
+  }
+
+  function hideTaskPanel() {
+    if (!studyTaskStack || !showTaskPanelBtn) {
+      return;
+    }
+    studyTaskStack.classList.add('study-task-stack--hidden');
+    showTaskPanelBtn.hidden = false;
+  }
+
+  function showTaskPanel() {
+    if (!studyTaskStack || !showTaskPanelBtn) {
+      return;
+    }
+    studyTaskStack.classList.remove('study-task-stack--hidden');
+    showTaskPanelBtn.hidden = true;
+  }
+
   function showError(title, message) {
-    taskProgress.textContent = 'Error';
+    if (taskBriefCard) {
+      taskBriefCard.hidden = true;
+    }
+    setStepControlsVisible(false);
+    taskTitle.hidden = false;
     taskTitle.textContent = title;
     taskDescription.innerHTML = `<p>${message}</p>`;
-    continueHint.hidden = true;
-    nextButton.hidden = true;
     homeButton.hidden = false;
   }
 
@@ -244,8 +313,35 @@ function initStudyTask() {
   let currentStep = record.completed ? steps.length : record.currentStep;
   let stepStartedAt = Date.now();
 
-  if (conditionNote && condition === 'conventional') {
-    conditionNote.textContent = 'Keep this page open while you work in the coding agent.';
+  function renderTaskIntro(stepIndex) {
+    if (taskHeading) {
+      taskHeading.textContent = task.heading;
+      taskHeading.hidden = false;
+    }
+    if (taskBlurb) {
+      taskBlurb.textContent = task.blurb;
+    }
+    if (taskTechNote) {
+      taskTechNote.textContent = techNoteText(condition);
+    }
+    if (conditionNote) {
+      if (condition === 'conventional') {
+        if (conditionNoteText) {
+          conditionNoteText.textContent = 'Keep this page open while you work in the coding agent.';
+        }
+        conditionNote.hidden = false;
+      } else {
+        conditionNote.hidden = true;
+      }
+    }
+    if (taskBriefCard) {
+      taskBriefCard.hidden = false;
+    }
+    setIntroExpanded(defaultIntroExpandedForStep(stepIndex));
+  }
+
+  function updateProgress(currentIndex, totalSteps) {
+    taskProgress.textContent = `STEP ${currentIndex + 1} OF ${totalSteps}`;
   }
 
   function persist() {
@@ -254,17 +350,33 @@ function initStudyTask() {
     saveTimings(all);
   }
 
-  function renderComplete() {
-    appName.textContent = task.heading;
-    taskProgress.textContent = 'Complete';
-    taskTitle.textContent = 'Task complete';
-    continueHint.hidden = true;
-    nextButton.hidden = true;
-    homeButton.hidden = false;
-
-    if (conditionNote) {
-      conditionNote.hidden = true;
+  function resetStepConfirmation() {
+    if (stepFinishedCheckbox) {
+      stepFinishedCheckbox.checked = false;
     }
+    confirmButton.disabled = true;
+  }
+
+  function updateConfirmButtonState() {
+    confirmButton.disabled = !stepFinishedCheckbox || !stepFinishedCheckbox.checked;
+  }
+
+  function renderComplete() {
+    if (condition === 'code_cut') {
+      showTaskPanel();
+    }
+    if (taskHeading) {
+      taskHeading.textContent = task.heading;
+      taskHeading.hidden = false;
+    }
+    if (taskBriefCard) {
+      taskBriefCard.hidden = false;
+    }
+    setIntroExpanded(false);
+    setStepControlsVisible(false);
+    taskTitle.hidden = false;
+    taskTitle.textContent = 'Task complete';
+    homeButton.hidden = false;
 
     const bothDone = getCompletedTaskCount() >= 2;
     if (bothDone) {
@@ -281,35 +393,39 @@ function initStudyTask() {
       return;
     }
 
+    renderTaskIntro(currentStep);
+    setStepControlsVisible(true);
+
     const step = steps[currentStep];
-    appName.textContent = task.heading;
-    taskProgress.textContent = `Step ${currentStep + 1} of ${steps.length}`;
+    updateProgress(currentStep, steps.length);
     taskTitle.textContent = step.title;
     taskDescription.innerHTML = step.description;
-    continueHint.hidden = false;
-    nextButton.hidden = false;
-    nextButton.disabled = false;
-    nextButton.textContent = currentStep === steps.length - 1 ? 'Complete' : 'Continue';
+    confirmButton.textContent = currentStep === steps.length - 1 ? 'Confirm and complete' : 'Confirm';
+    resetStepConfirmation();
     homeButton.hidden = true;
     downloadButton.hidden = true;
-    if (conditionNote && condition === 'conventional') {
-      conditionNote.hidden = false;
-    }
   }
 
   let advancing = false;
 
   function goToNextStep() {
-    if (advancing || record.completed || currentStep >= steps.length) {
+    if (
+      advancing
+      || record.completed
+      || currentStep >= steps.length
+      || !stepFinishedCheckbox
+      || !stepFinishedCheckbox.checked
+    ) {
       return;
     }
 
     advancing = true;
-    nextButton.disabled = true;
+    confirmButton.disabled = true;
 
     record.steps[currentStep] = toMinutes(Date.now() - stepStartedAt);
     currentStep += 1;
     record.currentStep = Math.min(currentStep, steps.length);
+    setIntroExpanded(defaultIntroExpandedForStep(currentStep));
 
     if (currentStep >= steps.length) {
       record.completed = true;
@@ -321,15 +437,33 @@ function initStudyTask() {
 
     persist();
     stepStartedAt = Date.now();
-    taskCard.classList.add('changing');
+    stepCard.classList.add('changing');
     setTimeout(() => {
       renderStep();
-      taskCard.classList.remove('changing');
+      stepCard.classList.remove('changing');
       advancing = false;
     }, 160);
   }
 
-  nextButton.addEventListener('click', goToNextStep);
+  if (stepFinishedCheckbox) {
+    stepFinishedCheckbox.addEventListener('change', updateConfirmButtonState);
+  }
+
+  if (taskIntroToggle) {
+    taskIntroToggle.addEventListener('click', () => {
+      setIntroExpanded(!introExpanded);
+    });
+  }
+
+  if (hideTaskPanelBtn) {
+    hideTaskPanelBtn.addEventListener('click', hideTaskPanel);
+  }
+
+  if (showTaskPanelBtn) {
+    showTaskPanelBtn.addEventListener('click', showTaskPanel);
+  }
+
+  confirmButton.addEventListener('click', goToNextStep);
 
   renderStep();
 }

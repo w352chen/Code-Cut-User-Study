@@ -25,54 +25,103 @@
       allow="clipboard-read; clipboard-write"
     ></iframe>
 
-    <section
-      id="task-card"
-      class="task-card study-task-card"
-      aria-live="polite"
+    <button
+      id="show-task-panel-btn"
+      class="show-task-panel-btn"
+      type="button"
+      hidden
     >
+      Show task panel
+    </button>
 
-      <div class="task-header">
-        <span id="task-app-name"></span>
-        <span id="task-progress">Step 1 of 6</span>
-      </div>
+    <div id="study-task-stack" class="study-task-stack study-task-stack--overlay" aria-live="polite">
 
-      <h2 id="task-title"></h2>
+      <section id="task-brief-card" class="study-panel task-brief-card">
+        <div class="panel-label">
+          <span>Task brief</span>
+          <span class="panel-label-line" aria-hidden="true"></span>
+        </div>
 
-      <div id="task-description"></div>
-
-      <p id="task-continue-hint" class="continue-hint">
-        When you have finished this step, click Continue.
-      </p>
-
-      <div class="task-footer">
-        <button
-          id="home-button"
-          class="secondary-button"
-          type="button"
-          hidden
-        >
-          Back to study page
-        </button>
+        <h1 id="task-heading"></h1>
 
         <button
-          id="download-button"
-          class="primary-button"
+          id="task-intro-toggle"
+          class="task-intro-toggle"
           type="button"
-          hidden
+          aria-expanded="false"
+          aria-controls="task-intro"
         >
-          Download timing CSV
+          Show task details
         </button>
 
-        <button
-          id="next-button"
-          class="primary-button"
-          type="button"
-        >
-          Continue
-        </button>
-      </div>
+        <div id="task-intro" class="task-intro-collapsible" hidden>
+          <p id="task-blurb"></p>
+          <p id="task-tech-note"></p>
+        </div>
+      </section>
 
-    </section>
+      <section id="step-card" class="study-panel step-card">
+        <div class="step-meta">
+          <span id="task-progress">Step 1 of 6</span>
+        </div>
+
+        <h2 id="task-title"></h2>
+
+        <div id="task-description"></div>
+
+        <p id="task-continue-hint" class="continue-hint">
+          When you are done with this step, check the box below and click Confirm.
+        </p>
+
+        <div id="step-confirm-block" class="step-confirm-block">
+          <label class="step-confirm-label">
+            <input
+              id="step-finished-checkbox"
+              type="checkbox"
+            />
+            I have finished this step
+          </label>
+        </div>
+
+        <div class="task-footer">
+          <button
+            id="hide-task-panel-btn"
+            class="secondary-button hide-task-panel-btn"
+            type="button"
+          >
+            Hide task panel
+          </button>
+
+          <button
+            id="home-button"
+            class="secondary-button"
+            type="button"
+            hidden
+          >
+            Back to study page
+          </button>
+
+          <button
+            id="download-button"
+            class="primary-button"
+            type="button"
+            hidden
+          >
+            Download timing CSV
+          </button>
+
+          <button
+            id="confirm-button"
+            class="primary-button"
+            type="button"
+            disabled
+          >
+            Confirm
+          </button>
+        </div>
+      </section>
+
+    </div>
 
   </main>
 
