@@ -50,225 +50,255 @@ const tasks = [
     `
   },
   {
-    title: "Explore the Project",
+    title: "Review the Project",
     description: `
       <p>
-        The <strong>Project</strong> contains the features that make up your Reminders app.
-        Related features are organized into folders, such as <strong>Reminder Management</strong>
-        and <strong>Reminder View & Interactions</strong>.
+        <strong>Goal:</strong> Check that the proposed features match the app
+        you want to build.
       </p>
 
       <p>
-        If you want to change a feature before building it, click the feature in the
-        <strong>Project</strong> and edit it in the <strong>Source</strong> tab.
+        The <strong>Project</strong> organizes your app into features and
+        feature components. A <strong>feature</strong> is a high-level capability
+        of your app, such as <em>Time Management</em>. A
+        <strong>feature component</strong> is a specific functionality within
+        that feature, such as <em>Set a Deadline</em>.
       </p>
 
       <p>
-        Try this now: select <strong>Reminder Input Form</strong> and make a small change to it.
+        You can edit existing components, or add new features and components as your
+        idea develops.
+      </p>
+
+      <p>
+        Select <strong>a feature component</strong> and make a small change
+        in the <strong>Source</strong> tab.
       </p>
     `
   },
 
-  { title: "Add a New Feature", 
-    description: ` 
-    <p> The Project is not limited to the features generated in the initial plan. You can add new features at any time. </p> 
-    <p> Click <strong>+ Add component</strong> and add a new feature that allows users to <strong>set a due date for a reminder</strong>. </p> ` 
-  },
-
-  { 
-    title: "Add a Feature to the Timeline", 
-    description: 
-    ` <p> When you are satisfied with a feature and are ready to build it, drag it from the <strong>Project</strong> onto a <strong>track</strong> in the timeline. </p> 
-      <p> Choose one feature you are ready to build and drag it onto <strong>Track 1</strong>. </p> ` 
-  },
-  { 
-    title: "Add a Feature Group", 
-    description: 
-    ` <p> You can also add a whole group of related features at once. This is useful when you are satisfied with all of the features in a folder. </p> 
-    <p> Drag <strong>one</strong> folder onto <strong>Track 1</strong> to add its features to the timeline. </p> ` 
-  },
-
   {
-  title: "Plan a Clip",
-  description: `
-    <p>
-      <strong>Plan</strong> lets you review how Code Cut plans to implement a feature
-      before actually building it.
-    </p>
+    title: "Expand the App",
+    description: `
+      <p>
+        <strong>Goal:</strong> Add a new feature, or enrich an existing feature
+        by adding components that were not included in the initial project plan.
+      </p>
 
-    <p>
-      Click the <strong>first clip</strong> on Track 1, then click <strong>Plan</strong>.
-    </p>
-
-    <p>
-      Open the <strong>Plan</strong> tab to review the implementation plan for that feature.
-      If you are not satisfied with the plan, or feel that something is missing,
-      you can edit or add to it.
-    </p>
+      <p>
+        Click <strong>+ Add component</strong> and add a component that lets users
+        set a <strong>due date</strong> for a reminder.
+      </p>
     `
   },
 
   {
-  title: "Plan Multiple Clips",
-  description: `
-    <p>
-      You can also plan multiple clips together to see how Code Cut plans to
-      implement them as a group.
-    </p>
+    title: "Arrange Features on the Timeline",
+    description: `
+      <p>
+        <strong>Goal:</strong> Decide which features or feature components you want to build,
+        and in what development sequence.
+      </p>
 
-    <p>
-      Click the <strong>{ }</strong> button. Put the <strong>{</strong> to the
-      left edge of the second clip, and move the <strong>}</strong> to the
-      right edge of the third clip. This defines the range you want to plan.
-    </p>
+      <p>
+        Drag a <strong>feature component</strong> from the <strong>Project</strong>
+        onto <strong>Track 1</strong>.
+      </p>
 
-    <p>
-      Then click <strong>Plan</strong> to review their combined implementation plan.
-      If you are not satisfied with the plan, or feel that something is missing,
-      you can edit or add to it.
-    </p>
-  `
-},
+      <p>
+        You can also drag an entire <strong>feature</strong> onto the track
+        to add all of its components at once.
+      </p>
+    `
+  },
 
   {
-  title: "Clear the Current Range",
+    title: "Check the Implementation Plan",
+    description: `
+      <p>
+        <strong>Goal:</strong> Review how features are intended to be implemented
+        before any code is changed.
+      </p>
+
+      <p>
+        Click the <strong>Plan</strong> button to generate an implementation plan for all
+        feature components currently on the track.
+      </p>
+
+      <p>
+        Open the <strong>PLAN</strong> tab and review the proposed implementation
+        steps. If anything is missing or does not match what you expect, edit the
+        plan before building.
+      </p>
+    `
+  },
+
+  {
+    title: "Build the Planned Clips",
+    description: `
+      <p>
+        <strong>Goal:</strong> Apply the implementation plan to the actual
+        codebase.
+      </p>
+
+      <p>
+        Once the plan matches what you expect, click <strong>Build</strong>.
+        By default, Code Cut will implement all clips currently on the track
+        based on the plan you reviewed.
+      </p>
+    `
+  },
+
+  {
+    title: "Work on a Selected Range",
+    description: `
+      <p>
+        <strong>Goal:</strong> Focus on a subset of clips when you only want
+        to plan or build part of the track.
+      </p>
+
+      <p>
+        Use the <strong>{ }</strong> range tool to select the second and
+        third clips. Then click <strong>Plan</strong> and <strong>Build</strong>
+        to work only on the selected range.
+      </p>
+    `
+  },
+
+  {
+  title: "Clear the Selected Range",
   description: `
     <p>
-      To clear the current plan range, click the <strong>Range</strong> indicator
-      in the toolbar, then click <strong>×</strong>.
+      <strong>Goal:</strong> Return to working with the full track when you
+      no longer need to focus on a selected range.
     </p>
 
     <p>
-      This removes the current range selection without removing any clips from the timeline.
+      Click the <strong>Range</strong> indicator in the toolbar, then click
+      <strong>×</strong>.
+    </p>
+
+    <p>
+      This clears the range selection without removing any clips from the timeline.
     </p>
   `
 },
 
-{
-  title: "Group All Three Clips",
-  description: `
-    <p>
-      Now, use the <strong>{ }</strong> button again to group all three clips.
-    </p>
-  `
-},
-{
-  title: "Build the Clips",
-  description: `
-    <p>
-      Once you are satisfied with the implementation plan, you are ready to build it.
-    </p>
-
-    <p>
-      Click <strong>Build</strong> to build the three clips based on the
-      implementation plan you just did.
-    </p>
-  `
-},
 {
   title: "Review the App",
   description: `
     <p>
-      After building, open the <strong>Program</strong> tab to review and interact with
-      the app you just built.
+      <strong>Goal:</strong> Check that the built features work as you expected.
     </p>
 
     <p>
-      Take a moment to try the features and see how they work together in the current app.
+      Open the <strong>Program</strong> tab to interact with the app you just built.
+    </p>
+
+    <p>
+      Try the features and check how they work together in the current app.
     </p>
   `
 },
+
 {
-  title: "View Individual Scenes",
+  title: "Inspect Possible UI Cases Through Scenes",
   description: `
     <p>
-      You can inspect the UI scene associated with individual clips.
+      <strong>Goal:</strong> Explore the different UI cases that may occur
+      within the functionality represented by a clip.
     </p>
 
     <p>
-      Move your cursor over a clip and <strong>right-click</strong> it.
-      Select <strong>Unlink UI ↔ Logic</strong> to separate the UI scenes from their
-      linked logic clips.
+      Right-click a clip and select <strong>Unlink UI ↔ Logic</strong>.
+      This reveals its UI scenes separately from the logic clip so you can
+      inspect each case individually.
     </p>
 
     <p>
-      For each scene, click the <strong>zoom-in button</strong> in the
-      bottom-right corner of the scene clip to view it in more detail.
+      Click the <strong>zoom-in button</strong> in the bottom-right corner of a
+      scene clip to view it in more detail.
     </p>
   `
 },
+
 {
-  title: "Remove a Feature",
+  title: "Remove an Unneeded Component",
   description: `
     <p>
-      You now decide that the feature represented by the <strong>second clip</strong>
-      is redundant and no longer needed in the app.
+      <strong>Goal:</strong> Remove functionality that you no longer want in the app.
     </p>
 
     <p>
-      Click the <strong>×</strong> button in the top-right corner of the second clip
-      to remove it.
+      Imagine that the feature component represented by the
+      <strong>second clip</strong> is no longer needed. Click the
+      <strong>×</strong> in the top-right corner of the clip to remove it.
     </p>
 
     <p>
-      After removing the feature, <strong>re-build all remaining clips</strong>
-      so the app is rebuilt consistently and continues to work smoothly.
-    </p>
-
-    <p>
-      This removes the feature from the app and also removes the relevant code
-      from the codebase.
+      Then <strong>rebuild the remaining clips</strong>. Code Cut will update
+      the app and remove the corresponding implementation from the codebase.
     </p>
   `
 },
+
 {
   title: "Adjust Comment Density",
   description: `
     <p>
-      Click the <strong>Code</strong> tab to review the generated code.
+      <strong>Goal:</strong> Make generated code easier to understand by
+      controlling how many explanatory comments it includes.
     </p>
 
     <p>
-      You find that the code is difficult to read because it contains too few comments.
-      Open <strong>Settings</strong> on the right side of the screen and increase the
+      Open the <strong>Code</strong> tab to review the generated code.
+      Then open <strong>Settings</strong> and increase
       <strong>Comment Density</strong>.
     </p>
 
     <p>
-      This allows the code to include more comments to help you understand and interpret the code.
+      This tells Code Cut to include more comments in future generated code.
     </p>
   `
 },
+
 {
-  title: "Reduce Unnecessary Code",
+  title: "Reduce Defensive Code",
   description: `
     <p>
-      You notice that the codebase is becoming relatively large and contains more defensive
-      code than you need.
+      <strong>Goal:</strong> Control how much defensive code Code Cut adds
+      to the implementation.
     </p>
 
     <p>
-      Open <strong>Settings</strong> and adjust the <strong>Defensive Code</strong> setting
-      to reduce unnecessary defensive code in the generated implementation.
+      If the code contains more validation, checks, or safeguards than you need,
+      open <strong>Settings</strong> and reduce the
+      <strong>Defensive Code</strong> setting.
+    </p>
+
+    <p>
+      This helps keep the implementation smaller and simpler when additional
+      safeguards are unnecessary.
     </p>
   `
 },
+
 {
-  title: "Adjust the Scope of a Feature",
+  title: "Adjust a Component's Scope",
   description: `
     <p>
-      You now want the feature represented by the <strong>first clip</strong> to include
-      more functionality.
+      <strong>Goal:</strong> Change how much functionality a feature component
+      includes without replacing it entirely.
     </p>
 
     <p>
-      <strong>Extend</strong> the feature by dragging the <strong>right boundary</strong>
-      of the clip further to the right.
+      To add more functionality to the <strong>first clip</strong>, drag its
+      <strong>right boundary</strong> further to the right to extend its scope.
     </p>
 
     <p>
-      Similarly, if a feature represented by a clip feels more complicated than necessary,
-      you can <strong>trim</strong> it by dragging its right boundary to the left.
+      If the component includes more functionality than you need, drag the
+      boundary to the left to trim its scope.
     </p>
   `
 },
