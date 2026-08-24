@@ -114,6 +114,13 @@ const tasks = [
         You can also drag an entire <strong>feature dropdown</strong> onto the track
         to add all of its components at once.
       </li>
+
+      <li>
+        When a feature component is added to the timeline, Code Cut represents it
+        as a <strong>Clip</strong>. Similar to clips in video editing, each Clip
+        occupies a segment of the timeline and represents a unit of implementation
+        work that can be selected, modified, or rearranged independently.
+      </li>
     </ol>
     `
   },
@@ -123,13 +130,13 @@ const tasks = [
     description: `
     <ol>
       <li>
-        <strong>Goal:</strong> Review how features are intended to be implemented
+        <strong>Goal:</strong> Review how clips are intended to be implemented
         before any code is changed.
       </li>
 
       <li>
         Click the <strong>Plan</strong> button to generate an implementation plan for all
-        feature components currently on the track.
+        clips currently on the track.
       </li>
 
       <li>
@@ -164,7 +171,7 @@ const tasks = [
     description: `
     <ol>
       <li>
-        <strong>Goal:</strong> Sometimes, you may want to work on only part of the timeline rather than all components. Use a range to focus on a specific feature component or a subset of components.
+        <strong>Goal:</strong> Sometimes, you may want to work on only part of the timeline rather than all clips. Use a range to focus on a specific clip or a subset of clips.
       </li>
 
       <li>
@@ -240,7 +247,7 @@ const tasks = [
 },
 
 {
-  title: "Remove an Unneeded Component",
+  title: "Remove an Unneeded functionality",
   description: `
   <ol>
     <li>
@@ -249,7 +256,7 @@ const tasks = [
     </li>
 
     <li>
-      Imagine that the feature component represented by the
+      Imagine that the functionality represented by the
       <strong>second clip</strong> is no longer needed. Click the
       <strong>×</strong> in the top-right corner of the clip to remove it.
     </li>
@@ -302,11 +309,11 @@ const tasks = [
 },
 
 {
-  title: "Adjust a Component's Scope",
+  title: "Adjust a functionality's Scope",
   description: `
     <ol>
       <li>
-        <strong>Goal:</strong> Change how much functionality a feature component
+        <strong>Goal:</strong> Change how much functionality a clip
         includes without replacing it entirely.
       </li>
       <li>
@@ -318,7 +325,7 @@ const tasks = [
       </li>
 
       <li>
-        If the feature component includes more functionality than you need, drag the
+        If the clip includes more functionality than you need, drag the
         boundary to the left to trim its scope.
       </li>
     </ol>
@@ -340,8 +347,8 @@ const tasks = [
     </li>
 
     <li>
-      Modify the functionality clip on the new track to explore an
-      alternative approach. All feature components implemented before the selected
+      Modify the clip on the new track to explore an
+      alternative design. All feature components implemented before the selected
       clip are preserved, so you can branch from your existing work rather than
       starting over.
     </li>
@@ -359,7 +366,7 @@ const tasks = [
   description: `
   <ol>
     <li>
-      <strong>Goal:</strong> Define how two neighboring feature components should relate to
+      <strong>Goal:</strong> Define how two neighboring clips should relate to
       each other when their functionalities need to interact.
     </li>
 
@@ -369,7 +376,7 @@ const tasks = [
     </li>
 
     <li>
-      Choose the type of relationship that best describes how the two components
+      Choose the type of relationship that best describes how the two clips
       should work together:
     </li>
 
