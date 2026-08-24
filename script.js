@@ -52,254 +52,340 @@ const tasks = [
   {
     title: "Review the Project",
     description: `
-      <p>
+    <ol>
+      <li>
         <strong>Goal:</strong> Check that the proposed features match the app
         you want to build.
-      </p>
+      </li>
 
-      <p>
+      <li>
         The <strong>Project</strong> organizes your app into features and
         feature components. A <strong>feature</strong> is a high-level capability
         of your app, such as <em>Time Management</em>. A
         <strong>feature component</strong> is a specific functionality within
         that feature, such as <em>Set a Deadline</em>.
-      </p>
+      </li>
 
-      <p>
+      <li>
         You can edit existing components, or add new features and components as your
         idea develops.
-      </p>
-
-      <p>
-        Select <strong>a feature component</strong> and make a small change
+      </li>
+  
+      <li>
+        Click <strong>a feature component</strong> and make a small change
         in the <strong>Source</strong> tab.
-      </p>
+      </li>
+    </ol>    
     `
   },
 
   {
     title: "Expand the App",
     description: `
-      <p>
+    <ol>
+      <li>
         <strong>Goal:</strong> Add a new feature, or enrich an existing feature
         by adding components that were not included in the initial project plan.
-      </p>
+      </li>
 
-      <p>
+      <li>
         Click <strong>+ Add component</strong> and add a component that lets users
         set a <strong>due date</strong> for a reminder.
-      </p>
+      </li>
+    </ol>
     `
   },
 
   {
     title: "Arrange Features on the Timeline",
     description: `
-      <p>
+    <ol>
+      <li>
         <strong>Goal:</strong> Decide which features or feature components you want to build,
         and in what development sequence.
-      </p>
+      </li>
 
-      <p>
+      <li>
         Drag a <strong>feature component</strong> from the <strong>Project</strong>
         onto <strong>Track 1</strong>.
-      </p>
+      </li>
 
-      <p>
-        You can also drag an entire <strong>feature</strong> onto the track
+      <li>
+        You can also drag an entire <strong>feature dropdown</strong> onto the track
         to add all of its components at once.
-      </p>
+      </li>
+    </ol>
     `
   },
 
   {
     title: "Check the Implementation Plan",
     description: `
-      <p>
+    <ol>
+      <li>
         <strong>Goal:</strong> Review how features are intended to be implemented
         before any code is changed.
-      </p>
+      </li>
 
-      <p>
+      <li>
         Click the <strong>Plan</strong> button to generate an implementation plan for all
         feature components currently on the track.
-      </p>
+      </li>
 
-      <p>
+      <li>
         Open the <strong>PLAN</strong> tab and review the proposed implementation
         steps. If anything is missing or does not match what you expect, edit the
         plan before building.
-      </p>
+      </li>
+    </ol>
     `
   },
 
   {
     title: "Build the Planned Clips",
     description: `
-      <p>
+    <ol>
+      <li>
         <strong>Goal:</strong> Apply the implementation plan to the actual
         codebase.
-      </p>
+      </li>
 
-      <p>
+      <li>
         Once the plan matches what you expect, click <strong>Build</strong>.
         By default, Code Cut will implement all clips currently on the track
         based on the plan you reviewed.
-      </p>
+      </li>
+    </ol>
     `
   },
 
   {
     title: "Work on a Selected Range",
     description: `
-      <p>
-        <strong>Goal:</strong> Focus on a subset of clips when you only want
-        to plan or build part of the track.
-      </p>
+    <ol>
+      <li>
+        <strong>Goal:</strong> Sometimes, you may want to work on only part of the timeline rather than all components. Use a range to focus on a specific feature component or a subset of components.
+      </li>
 
-      <p>
-        Use the <strong>{ }</strong> range tool to select the second and
-        third clips. Then click <strong>Plan</strong> and <strong>Build</strong>
-        to work only on the selected range.
-      </p>
+      <li>
+        Use the <strong>{ }</strong> range tool to select the second and third clips.
+        First, place <strong>{</strong> at the left edge of the second clip, then place
+        <strong>}</strong> at the right edge of the third clip. Click <strong>Plan</strong>
+        and <strong>Build</strong> to work only on the selected range.
+      </li>
+    </ol>
     `
   },
 
   {
   title: "Clear the Selected Range",
   description: `
-    <p>
+  <ol>
+    <li>
       <strong>Goal:</strong> Return to working with the full track when you
       no longer need to focus on a selected range.
-    </p>
+    </li>
 
-    <p>
+    <li>
       Click the <strong>Range</strong> indicator in the toolbar, then click
       <strong>×</strong>.
-    </p>
+    </li>
 
-    <p>
+    <li>
       This clears the range selection without removing any clips from the timeline.
-    </p>
+    </li>
+  </ol>
   `
 },
 
 {
   title: "Review the App",
   description: `
-    <p>
+  <ol>
+    <li>
       <strong>Goal:</strong> Check that the built features work as you expected.
-    </p>
+    </li>
 
-    <p>
-      Open the <strong>Program</strong> tab to interact with the app you just built.
-    </p>
+    <li>
+      Open the <strong>RUN</strong> tab to interact with the app you just built.
+    </li>
 
-    <p>
+    <li>
       Try the features and check how they work together in the current app.
-    </p>
+    </li>
+  </ol>
   `
 },
 
 {
-  title: "Inspect Possible UI Cases Through Scenes",
+  title: "Inspect Appearances and Behaviours Through Scenes",
   description: `
-    <p>
-      <strong>Goal:</strong> Explore the different UI cases that may occur
-      within the functionality represented by a clip.
-    </p>
+  <ol>
+    <li>
+      <strong>Goal:</strong> Inspect the different appearances and behaviours that may occur within the functionality represented by a clip.
+    </li>
 
-    <p>
-      Right-click a clip and select <strong>Unlink UI ↔ Logic</strong>.
-      This reveals its UI scenes separately from the logic clip so you can
-      inspect each case individually.
-    </p>
+    <li>
+      Click <strong>Unlink</strong> beside the track name to separate the clip into its logic and scene representations, allowing you to inspect individual scenes separately.
+    </li>
 
-    <p>
-      Click the <strong>zoom-in button</strong> in the bottom-right corner of a
-      scene clip to view it in more detail.
-    </p>
+    <li>
+      Click the <strong>zoom-in button</strong> in the bottom-right corner of a scene clip to inspect it in more detail.
+    </li>
+
+    <li>
+      When you are finished, click <strong>🔗 Link</strong> on the scene track to link it back to the logic clip.
+    </li>
   `
 },
 
 {
   title: "Remove an Unneeded Component",
   description: `
-    <p>
-      <strong>Goal:</strong> Remove functionality that you no longer want in the app.
-    </p>
+  <ol>
+    <li>
+      <strong>Goal:</strong> Sometimes, you may decide that a feature you built earlier is no longer needed. 
+      You can remove its clip along with the associated code.
+    </li>
 
-    <p>
+    <li>
       Imagine that the feature component represented by the
       <strong>second clip</strong> is no longer needed. Click the
       <strong>×</strong> in the top-right corner of the clip to remove it.
-    </p>
+    </li>
 
-    <p>
+    <li>
       Then <strong>rebuild the remaining clips</strong>. Code Cut will update
       the app and remove the corresponding implementation from the codebase.
-    </p>
+    </li>
+  </ol>
   `
 },
 
 {
-  title: "Adjust Comment Density",
+  title: "Adjust Clip Settings",
   description: `
-    <p>
-      <strong>Goal:</strong> Make generated code easier to understand by
-      controlling how many explanatory comments it includes.
-    </p>
+  <ol>
+    <li>
+      <strong>Goal:</strong> Control how a feature component is implemented by adjusting
+      its code comments, tests, and defensive code.
+    </li>
 
-    <p>
-      Open the <strong>Code</strong> tab to review the generated code.
-      Then open <strong>Settings</strong> and increase
-      <strong>Comment Density</strong>.
-    </p>
+    <li>
+      Open <strong>Settings</strong> for a clip or a range of clips. You can adjust three implementation qualities:
+    </li> 
 
-    <p>
-      This tells Code Cut to include more comments in future generated code.
-    </p>
-  `
-},
+    <ol>
+      <li>
+        <strong>Comment Density</strong> controls how much documentation
+        is included in the generated code.
+      </li>
 
-{
-  title: "Reduce Defensive Code",
-  description: `
-    <p>
-      <strong>Goal:</strong> Control how much defensive code Code Cut adds
-      to the implementation.
-    </p>
+      <li>
+        <strong>Tests</strong> controls how broadly Code Cut tests the functionality,
+        from essential behaviour to additional edge cases and failure conditions.
+      </li>
 
-    <p>
-      If the code contains more validation, checks, or safeguards than you need,
-      open <strong>Settings</strong> and reduce the
-      <strong>Defensive Code</strong> setting.
-    </p>
+      <li>
+        <strong>Defensive Code</strong> uses RGB controls to tune three dimensions:
+        <strong>R</strong> for error handling, <strong>G</strong> for input validation,
+        and <strong>B</strong> for edge-case handling. You can adjust the RGB values
+        individually or pick a color directly to set the combination.
+      </li>
+    </ol>
 
-    <p>
-      This helps keep the implementation smaller and simpler when additional
-      safeguards are unnecessary.
-    </p>
+    <li>
+      Try changing these settings to see how they affect the implementation
+      generated for the clip.
+    </li>
   `
 },
 
 {
   title: "Adjust a Component's Scope",
   description: `
-    <p>
-      <strong>Goal:</strong> Change how much functionality a feature component
-      includes without replacing it entirely.
-    </p>
+    <ol>
+      <li>
+        <strong>Goal:</strong> Change how much functionality a feature component
+        includes without replacing it entirely.
+      </li>
+      <li>
+        To add more functionality to the <strong>first clip</strong>, drag its
+        <strong>right edge</strong> further to the right to extend its scope.
+        Code Cut will automatically re-plan the functionality. Review the updated
+        plan, and if you are satisfied with it, click <strong>Build</strong> to
+        implement the changes.
+      </li>
 
-    <p>
-      To add more functionality to the <strong>first clip</strong>, drag its
-      <strong>right boundary</strong> further to the right to extend its scope.
-    </p>
+      <li>
+        If the feature component includes more functionality than you need, drag the
+        boundary to the left to trim its scope.
+      </li>
+    </ol>
+  `
+},
+{
+  title: "Explore a Different Direction",
+  description: `
+  <ol>
+    <li>
+      <strong>Goal:</strong> Explore an alternative direction when you are uncertain
+      about a software design decision, without losing the work you have already completed.
+    </li>
 
-    <p>
-      If the component includes more functionality than you need, drag the
-      boundary to the left to trim its scope.
-    </p>
+    <li>
+      Click <strong>Select Forward</strong>, then choose the clip where you want
+      to explore a different direction. Drag downward from that clip to create a
+      <strong>new track</strong>.
+    </li>
+
+    <li>
+      Modify the functionality clip on the new track to explore an
+      alternative approach. All feature components implemented before the selected
+      clip are preserved, so you can branch from your existing work rather than
+      starting over.
+    </li>
+
+    <li>
+      Before working on the new direction, click the <strong>lock</strong> icon to
+      <strong>unlock the new track</strong>, and lock the previous track. This makes
+      sure that subsequent planning and building are applied to the track you want
+      to continue working on.
+    </li>
+  `
+},
+{
+  title: "Build a Bridge Between Clips",
+  description: `
+  <ol>
+    <li>
+      <strong>Goal:</strong> Define how two neighboring feature components should relate to
+      each other when their functionalities need to interact.
+    </li>
+
+    <li>
+      Move your cursor between two components until the <strong>+</strong> button
+      appears, then click it to create a bridge between them.
+    </li>
+
+    <li>
+      Choose the type of relationship that best describes how the two components
+      should work together:
+    </li>
+
+    <ul>
+      <li><strong>Compose</strong> — Integrate both functionalities into a combined behavior.</li>
+      <li><strong>Depend</strong> — Have one clip reuse functionality provided by the other.</li>
+      <li><strong>Coordinate</strong> — Define how shared behavior between the two clips should work together.</li>
+      <li><strong>Isolate</strong> — Keep changes in one clip from affecting the other.</li>
+      <li><strong>Resolve</strong> — Reconcile conflicting requirements between the two clips.</li>
+    </ul>
+
+    <li>
+      Create a bridge between two clips and choose the relationship that best
+      matches how you want their functionalities to interact.
+    </li>
+  </ol>
   `
 },
 
@@ -321,6 +407,8 @@ const taskDescription = document.getElementById("task-description");
 
 const backButton = document.getElementById("back-button");
 const nextButton = document.getElementById("next-button");
+
+const collapseToggle = document.getElementById("collapse-toggle");
 
 
 /* ------------------------------
@@ -409,17 +497,7 @@ nextButton.addEventListener("click", () => {
     currentTaskIndex === tasks.length - 1
   ) {
 
-    taskTitle.textContent =
-      "Study Task Complete";
-
-    taskDescription.textContent =
-      "You have completed the development task.";
-
-    taskProgress.textContent =
-      "Complete";
-
-    nextButton.disabled = true;
-    backButton.disabled = true;
+    window.location.href = "index.html";
 
     return;
   }
@@ -441,6 +519,25 @@ backButton.addEventListener("click", () => {
     changeTask(currentTaskIndex - 1);
 
   }
+
+});
+
+
+/* ------------------------------
+   Collapse / expand
+------------------------------ */
+
+collapseToggle.addEventListener("click", () => {
+
+  const collapsed = taskCard.classList.toggle("task-card--collapsed");
+
+  collapseToggle.setAttribute("aria-expanded", String(!collapsed));
+  collapseToggle.setAttribute(
+    "aria-label",
+    collapsed ? "Expand task card" : "Collapse task card"
+  );
+  collapseToggle.title = collapsed ? "Expand" : "Collapse";
+  collapseToggle.textContent = collapsed ? "+" : "–";
 
 });
 

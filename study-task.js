@@ -34,28 +34,30 @@ const SESSION_TASK_IDS = {
 };
 
 const STEP_TITLES = [
-  'Build five features.',
-  'Simplify a feature',
-  'Expand a feature',
-  'Remove a feature',
-  'Add comments to the code',
-  'Inspect a feature interface',
+  'Build Five Features',
+  'Simplify a Feature',
+  'Remove the Second Feature',
+  'Remove Error Handling',
+  'Add Explanatory Comments',
+  'Explore an Alternative Direction',
+  'Inspect a Feature',
 ];
 
 const STEP_BODIES = [
   '<p>Design and build the app with <strong>five</strong> features that you think would make it useful. A <strong>feature</strong> is a distinct user-facing capability that supports a meaningful user goal. A feature may include multiple interface components or actions; individual buttons, fields, or minor interactions do not count as separate features.</p>',
   '<p>Choose one feature you have built that seems more complicated than necessary. Simplify it.</p>',
-  '<p>Choose another feature that feels too limited. Expand its functionality.</p>',
   '<p>Remove the second feature you built from the application.</p>',
+  '<p>You notice that the generated implementation includes more error-handling code than you need for this prototype. Remove the error-handling code.</p>',
   '<p>You are preparing the project for another developer to review. Add more explanatory comments to the generated code so that it is easier to understand, without changing the application\'s behaviour.</p>',
-  '<p>You want to take a closer look at how one of the features appears in the application. Choose one feature and inspect its interface in more detail.</p>',
+  '<p>You are not sure that the direction you chose for the last feature is the best one. Explore an alternative direction for that feature while keeping the rest of the application unchanged.</p>',
+  '<p>You want to better understand how one of the features is implemented and how it appears in the application. Choose one feature and inspect it in more detail.</p>',
 ];
 
 function techNoteText(condition) {
   if (condition === 'conventional') {
-    return 'Please implement this app using <strong>HTML, CSS, and JavaScript</strong>. Feel free to organize the implementation across multiple files as needed.';
+    return 'Please implement this app using HTML, CSS, and JavaScript. Feel free to organize the implementation across multiple files as needed.';
   }
-  return 'Please build this app using <strong>HTML, CSS, and JavaScript</strong>. Code Cut uses this stack.';
+  return 'Please build this app using HTML, CSS, and JavaScript. Code Cut uses this stack.';
 }
 
 function stepsFor(task) {
@@ -148,6 +150,7 @@ function downloadStudyCsv() {
     'step4_minutes',
     'step5_minutes',
     'step6_minutes',
+    'step7_minutes',
   ];
 
   const lines = [header.join(',')];
@@ -163,6 +166,7 @@ function downloadStudyCsv() {
       formatMinutes(record.steps[3]),
       formatMinutes(record.steps[4]),
       formatMinutes(record.steps[5]),
+      formatMinutes(record.steps[6]),
     ].map(csvCell);
     lines.push(row.join(','));
   });
@@ -302,7 +306,7 @@ function initStudyTask() {
     record = {
       condition: CONDITION_LABELS[condition],
       task_name: task.csvName,
-      steps: [null, null, null, null, null, null],
+      steps: [null, null, null, null, null, null, null],
       currentStep: 0,
       completed: false,
     };
