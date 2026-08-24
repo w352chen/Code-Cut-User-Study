@@ -1,8 +1,8 @@
 /*
   Timed study tasks.
 
-  Each task has 6 steps shown one at a time.
-  Time is recorded when the participant clicks Confirm, in minutes.
+  Each task has 7 steps shown one at a time.
+  Time is recorded when the participant clicks Next, in minutes.
   The Code Cut iframe is never reloaded from this file.
 */
 
@@ -58,6 +58,22 @@ function techNoteText(condition) {
     return 'Please implement this app using HTML, CSS, and JavaScript. Feel free to organize the implementation across multiple files as needed.';
   }
   return 'Please build this app using HTML, CSS, and JavaScript. Code Cut uses this stack.';
+}
+
+const STEP_COUNT = STEP_TITLES.length;
+
+function emptyStepValues() {
+  return Array.from({ length: STEP_COUNT }, () => null);
+}
+
+function ensureRecordShape(record) {
+  if (!record.steps || record.steps.length !== STEP_COUNT) {
+    record.steps = emptyStepValues();
+  }
+  if (!record.ratings || record.ratings.length !== STEP_COUNT) {
+    record.ratings = emptyStepValues();
+  }
+  return record;
 }
 
 function stepsFor(task) {
@@ -144,29 +160,20 @@ function downloadStudyCsv() {
     'participant_id',
     'condition',
     'task_name',
-    'step1_minutes',
-    'step2_minutes',
-    'step3_minutes',
-    'step4_minutes',
-    'step5_minutes',
-    'step6_minutes',
-    'step7_minutes',
+    ...Array.from({ length: STEP_COUNT }, (_, i) => `step${i + 1}_minutes`),
+    ...Array.from({ length: STEP_COUNT }, (_, i) => `step${i + 1}_success`),
   ];
 
   const lines = [header.join(',')];
 
   records.forEach((record) => {
+    ensureRecordShape(record);
     const row = [
       participantId,
       record.condition,
       record.task_name,
-      formatMinutes(record.steps[0]),
-      formatMinutes(record.steps[1]),
-      formatMinutes(record.steps[2]),
-      formatMinutes(record.steps[3]),
-      formatMinutes(record.steps[4]),
-      formatMinutes(record.steps[5]),
-      formatMinutes(record.steps[6]),
+      ...record.steps.map(formatMinutes),
+      ...record.ratings.map((value) => (value == null ? '' : String(value))),
     ].map(csvCell);
     lines.push(row.join(','));
   });
@@ -206,11 +213,11 @@ function initStudyTask() {
   const taskTitle = document.getElementById('task-title');
   const taskDescription = document.getElementById('task-description');
   const continueHint = document.getElementById('task-continue-hint');
-  const stepConfirmBlock = document.getElementById('step-confirm-block');
-  const stepFinishedCheckbox = document.getElementById('step-finished-checkbox');
+  const stepRatingBlock = document.getElementById('step-rating-block');
+  const stepRatingInputs = document.querySelectorAll('input[name="step-success-rating"]');
   const conditionNote = document.getElementById('condition-note');
   const conditionNoteText = document.querySelector('.condition-note-text');
-  const confirmButton = document.getElementById('confirm-button');
+  const nextButton = document.getElementById('next-button');
   const homeButton = document.getElementById('home-button');
   const downloadButton = document.getElementById('download-button');
   const hideTaskPanelBtn = document.getElementById('hide-task-panel-btn');
@@ -232,10 +239,10 @@ function initStudyTask() {
       taskTitle.hidden = !visible;
     }
     continueHint.hidden = !visible;
-    if (stepConfirmBlock) {
-      stepConfirmBlock.hidden = !visible;
+    if (stepRatingBlock) {
+      stepRatingBlock.hidden = !visible;
     }
-    confirmButton.hidden = !visible;
+    nextButton.hidden = !visible;
     if (hideTaskPanelBtn) {
       hideTaskPanelBtn.hidden = !visible;
     }
@@ -303,15 +310,18 @@ function initStudyTask() {
   let record = timings[key];
 
   if (!record) {
-    record = {
+    record = ensureRecordShape({
       condition: CONDITION_LABELS[condition],
       task_name: task.csvName,
-      steps: [null, null, null, null, null, null, null],
+      steps: emptyStepValues(),
+      ratings: emptyStepValues(),
       currentStep: 0,
       completed: false,
-    };
+    });
     timings[key] = record;
     saveTimings(timings);
+  } else {
+    ensureRecordShape(record);
   }
 
   let currentStep = record.completed ? steps.length : record.currentStep;
@@ -354,15 +364,20 @@ function initStudyTask() {
     saveTimings(all);
   }
 
-  function resetStepConfirmation() {
-    if (stepFinishedCheckbox) {
-      stepFinishedCheckbox.checked = false;
-    }
-    confirmButton.disabled = true;
+  function resetStepRating() {
+    stepRatingInputs.forEach((input) => {
+      input.checked = false;
+    });
+    nextButton.disabled = true;
   }
 
-  function updateConfirmButtonState() {
-    confirmButton.disabled = !stepFinishedCheckbox || !stepFinishedCheckbox.checked;
+  function getSelectedRating() {
+    const selected = document.querySelector('input[name="step-success-rating"]:checked');
+    return selected ? Number(selected.value) : null;
+  }
+
+  function updateNextButtonState() {
+    nextButton.disabled = getSelectedRating() == null;
   }
 
   function renderComplete() {
@@ -404,8 +419,8 @@ function initStudyTask() {
     updateProgress(currentStep, steps.length);
     taskTitle.textContent = step.title;
     taskDescription.innerHTML = step.description;
-    confirmButton.textContent = currentStep === steps.length - 1 ? 'Confirm and complete' : 'Confirm';
-    resetStepConfirmation();
+    nextButton.textContent = currentStep === steps.length - 1 ? 'Next and complete' : 'Next';
+    resetStepRating();
     homeButton.hidden = true;
     downloadButton.hidden = true;
   }
@@ -413,20 +428,21 @@ function initStudyTask() {
   let advancing = false;
 
   function goToNextStep() {
+    const selectedRating = getSelectedRating();
     if (
       advancing
       || record.completed
       || currentStep >= steps.length
-      || !stepFinishedCheckbox
-      || !stepFinishedCheckbox.checked
+      || selectedRating == null
     ) {
       return;
     }
 
     advancing = true;
-    confirmButton.disabled = true;
+    nextButton.disabled = true;
 
     record.steps[currentStep] = toMinutes(Date.now() - stepStartedAt);
+    record.ratings[currentStep] = selectedRating;
     currentStep += 1;
     record.currentStep = Math.min(currentStep, steps.length);
     setIntroExpanded(defaultIntroExpandedForStep(currentStep));
@@ -449,9 +465,9 @@ function initStudyTask() {
     }, 160);
   }
 
-  if (stepFinishedCheckbox) {
-    stepFinishedCheckbox.addEventListener('change', updateConfirmButtonState);
-  }
+  stepRatingInputs.forEach((input) => {
+    input.addEventListener('change', updateNextButtonState);
+  });
 
   if (taskIntroToggle) {
     taskIntroToggle.addEventListener('click', () => {
@@ -467,7 +483,7 @@ function initStudyTask() {
     showTaskPanelBtn.addEventListener('click', showTaskPanel);
   }
 
-  confirmButton.addEventListener('click', goToNextStep);
+  nextButton.addEventListener('click', goToNextStep);
 
   renderStep();
 }
