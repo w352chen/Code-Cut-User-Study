@@ -44,7 +44,7 @@ const STEP_TITLES = [
 ];
 
 const STEP_BODIES = [
-  '<p>Design and build the app with <strong>five</strong> features that you think would make it useful. A <strong>feature</strong> is a distinct user-facing capability that supports a meaningful user goal. A feature may include multiple interface components or actions; individual buttons, fields, or minor interactions do not count as separate features.</p>',
+  '<p>Design and build the app with <strong>five</strong> features that you think would make it useful. Your five features should include functionality related to both the <strong>front end</strong> of the application and its <strong>underlying logic or data handling</strong>. A <strong>feature</strong> is a distinct capability that supports a meaningful user goal; individual buttons, fields, or minor interactions do not count as separate features.</p>',
   '<p>Choose one feature you have built that seems more complicated than necessary. Simplify it.</p>',
   '<p>Remove the second feature you built from the application.</p>',
   '<p>You notice that the generated implementation includes more error-handling code than you need for this prototype. Remove the error-handling code.</p>',
@@ -52,6 +52,26 @@ const STEP_BODIES = [
   '<p>You are not sure that the direction you chose for the last feature is the best one. Explore an alternative direction for that feature while keeping the rest of the application unchanged.</p>',
   '<p>You want to better understand how one of the features is implemented and how it appears in the application. Choose one feature and inspect it in more detail.</p>',
 ];
+
+// [
+  
+
+//   '<p>Review the features you have built and choose <strong>one feature you are not fully satisfied with</strong>. Either <strong>simplify</strong> it by reducing unnecessary functionality, or <strong>enrich</strong> it by adding functionality that you think would make it more useful.</p>',
+
+//   '<p>Choose <strong>one feature you are not satisfied with</strong> and remove it from the application. Then propose and build a <strong>new feature</strong> that you think would be a better addition to the app.</p>',
+
+//   '<p>Consider the <strong>new feature you just added</strong>. Before inspecting the application, tell me what change you would expect to see in the interface compared with the version before this feature was added. Then show me or explain to me the <strong>View Diff</strong> that captures this change.</p>',
+
+//   '<p>You notice that the generated implementation includes more error-handling code than you need for this prototype. Reduce the amount of <strong>error-handling code</strong> without changing the intended functionality of the application.</p>',
+
+//   '<p>You are preparing the project for another developer to review. Add more <strong>explanatory comments</strong> to the generated code so that it is easier to understand, without changing the application\\'s behaviour.</p>',
+
+//   '<p>You are not sure that the direction you chose for one of your features is the best one. Choose a feature and explore an <strong>alternative direction</strong> for it while keeping the work you completed before that point available.</p>',
+
+//   '<p>You want to better understand how one of the features is implemented and how it appears in the application. Choose <strong>one feature</strong> and inspect both its implementation and its appearance in more detail.</p>',
+
+//   '<p><strong>Undo your most recent change</strong> to the application. Make sure that the work you completed before that change is preserved.</p>'
+// ];
 
 function techNoteText(condition) {
   if (condition === 'conventional') {

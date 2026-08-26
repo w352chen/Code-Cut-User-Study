@@ -59,20 +59,21 @@ const tasks = [
       </li>
 
       <li>
-        The <strong>Project</strong> organizes your app into features and
-        feature components. A <strong>feature</strong> is a high-level capability
-        of your app, such as <em>Time Management</em>. A
-        <strong>feature component</strong> is a specific functionality within
-        that feature, such as <em>Set a Deadline</em>.
+        The <strong>FEATURE LIBRARY</strong> organizes related functionality into
+        <strong>feature groups</strong>. For example,
+        <em>Organization & Filtering</em> is a feature group.
+        Each group contains <strong>features</strong>, which are specific
+        functionalities you can add to your app, such as
+        <em>Filter Expenses by Category</em>.
       </li>
 
       <li>
-        You can edit existing components, or add new features and components as your
+        You can edit existing features, or add new feature groups and features as your
         idea develops.
       </li>
   
       <li>
-        Click <strong>a feature component</strong> and make a small change
+        Click <strong>a feature</strong> and make a small change
         in the <strong>Source</strong> tab.
       </li>
     </ol>    
@@ -84,13 +85,13 @@ const tasks = [
     description: `
     <ol>
       <li>
-        <strong>Goal:</strong> Add a new feature, or enrich an existing feature
-        by adding components that were not included in the initial project plan.
+        <strong>Goal:</strong> Add a new feature library, or enrich an existing feature group
+        by adding features that were not included in the current feature library.
       </li>
 
       <li>
-        Click <strong>+ Add component</strong> and add a component that lets users
-        set a <strong>due date</strong> for a reminder.
+        Click <strong>+ Add feature</strong> and add a feature that <strong>lets users
+        set a due date for a reminder</strong>.
       </li>
     </ol>
     `
@@ -101,23 +102,23 @@ const tasks = [
     description: `
     <ol>
       <li>
-        <strong>Goal:</strong> Decide which features or feature components you want to build,
+        <strong>Goal:</strong> Decide which features you want to build,
         and in what development sequence.
       </li>
 
       <li>
-        Drag a <strong>feature component</strong> from the <strong>Project</strong>
+        Drag a <strong>feature</strong> from the <strong>FEATURE LIBRARY</strong>
         onto <strong>Track 1</strong>.
       </li>
 
       <li>
-        You can also drag an entire <strong>feature dropdown</strong> onto the track
-        to add all of its components at once.
+        You can also drag an entire <strong>feature library</strong> onto the track
+        to add all of its features at once.
       </li>
 
       <li>
-        When a feature component is added to the timeline, Code Cut represents it
-        as a <strong>Clip</strong>. Similar to clips in video editing, each Clip
+        When a feature is added to the timeline, Code Cut represents it
+        as a <strong>Feature Clip</strong>. Similar to clips in video editing, each Clip
         occupies a segment of the timeline and represents a unit of implementation
         work that can be selected, modified, or rearranged independently.
       </li>
@@ -280,6 +281,30 @@ const tasks = [
       Try the features and check how they work together in the current app.
     </li>
   </ol>
+  `
+},
+
+{
+  title: "Inspect Diffs During Development",
+  description: `
+    <p>
+      <strong>Goal:</strong> Inspect how the interface and code change
+      as your application develops.
+    </p>
+
+    <ol>
+      <li>
+        Move the <strong>playhead</strong> to the space between two
+        <strong>built Clips</strong>.
+      </li>
+
+      <li>
+        Open the <strong>RUN</strong> tab. You can inspect the
+        <strong>View Diff</strong> to see how the interface changed,
+        and the <strong>Code Diff</strong> to see the corresponding
+        changes in the implementation.
+      </li>
+    </ol>
   `
 },
 
