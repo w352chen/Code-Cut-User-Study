@@ -124,6 +124,32 @@ const tasks = [
     </ol>
     `
   },
+  {
+  title: "Review a Mockup",
+    description: `
+    <ol>
+      <li>
+        <strong>Goal:</strong> Preview what a feature may look like and how users
+        may interact with it before implementing it.
+      </li>
+
+      <li>
+        Clips with a user interface display a <strong>mockup scene</strong>
+        showing a visual preview of the feature.
+      </li>
+
+      <li>
+        Click the <strong>zoom-in button</strong> in the bottom-left corner of
+        the clip to inspect the mockup in more detail.
+      </li>
+
+      <li>
+        Use the mockup to check whether the appearance and expected behaviour
+        match what you intended for the feature.
+      </li>
+    </ol>
+    `
+  },
 
   {
     title: "Check the Implementation Plan",
@@ -149,6 +175,33 @@ const tasks = [
   },
 
   {
+    title: "Read the Development Line",
+    description: `
+    <ol>
+      <li>
+        <strong>Goal:</strong> Understand the amount of implementation work
+        represented by each clip on the timeline.
+      </li>
+
+      <li>
+        The marks on the <strong>development line</strong> correspond to the
+        implementation steps generated in the plan.
+      </li>
+
+      <li>
+        A clip with more implementation steps appears <strong>wider</strong> on
+        the timeline, while a clip with fewer steps appears <strong>narrower</strong>.
+      </li>
+
+      <li>
+        This gives you a visual sense of the relative amount of development work
+        planned for each clip.
+      </li>
+    </ol>
+    `
+  },
+
+  {
     title: "Build the Planned Clips",
     description: `
     <ol>
@@ -161,6 +214,12 @@ const tasks = [
         Once the plan matches what you expect, click <strong>Build</strong>.
         By default, Code Cut will implement all clips currently on the track
         based on the plan you reviewed.
+      </li>
+
+      <li>
+        As the build progresses, the <strong>red playhead</strong> moves from
+        left to right across the timeline, showing which part of the planned
+        development work is currently being implemented.
       </li>
     </ol>
     `
@@ -224,27 +283,27 @@ const tasks = [
   `
 },
 
-{
-  title: "Inspect Appearances and Behaviours Through Scenes",
-  description: `
-  <ol>
-    <li>
-      <strong>Goal:</strong> Inspect the different appearances and behaviours that may occur within the functionality represented by a clip.
-    </li>
+// {
+//   title: "Inspect Appearances and Behaviours Through Scenes",
+//   description: `
+//   <ol>
+//     <li>
+//       <strong>Goal:</strong> Inspect the different appearances and behaviours that may occur within the functionality represented by a clip.
+//     </li>
 
-    <li>
-      Click <strong>Unlink</strong> beside the track name to separate the clip into its logic and scene representations, allowing you to inspect individual scenes separately.
-    </li>
+//     <li>
+//       Click <strong>Unlink</strong> beside the track name to separate the clip into its logic and scene representations, allowing you to inspect individual scenes separately.
+//     </li>
 
-    <li>
-      Click the <strong>zoom-in button</strong> in the bottom-right corner of a scene clip to inspect it in more detail.
-    </li>
+//     <li>
+//       Click the <strong>zoom-in button</strong> in the bottom-right corner of a scene clip to inspect it in more detail.
+//     </li>
 
-    <li>
-      When you are finished, click <strong>🔗 Link</strong> on the scene track to link it back to the logic clip.
-    </li>
-  `
-},
+//     <li>
+//       When you are finished, click <strong>🔗 Link</strong> on the scene track to link it back to the logic clip.
+//     </li>
+//   `
+// },
 
 {
   title: "Remove an Unneeded functionality",
@@ -259,6 +318,12 @@ const tasks = [
       Imagine that the functionality represented by the
       <strong>second clip</strong> is no longer needed. Click the
       <strong>×</strong> in the top-right corner of the clip to remove it.
+    </li>
+
+     <li>
+      Code Cut manages clip implementations modularly to help reduce unnecessary
+      dependencies between clips and limit how much removing one functionality
+      affects the others.
     </li>
 
     <li>
@@ -361,41 +426,66 @@ const tasks = [
     </li>
   `
 },
+// {
+//   title: "Build a Bridge Between Clips",
+//   description: `
+//   <ol>
+//     <li>
+//       <strong>Goal:</strong> Define how two clips should relate to
+//       each other when their functionalities need to interact.
+//     </li>
+
+//     <li>
+//       Open the bridges tab and follow the instructions.
+//     </li>
+
+//     <li>
+//       Choose the type of relationship that best describes how the two clips
+//       should work together:
+//     </li>
+
+//     <ul>
+//       <li><strong>Compose</strong> — Integrate both functionalities into a combined behavior.</li>
+//       <li><strong>Depend</strong> — Have one clip reuse functionality provided by the other.</li>
+//       <li><strong>Coordinate</strong> — Define how shared behavior between the two clips should work together.</li>
+//       <li><strong>Isolate</strong> — Keep changes in one clip from affecting the other.</li>
+//       <li><strong>Resolve</strong> — Reconcile conflicting requirements between the two clips.</li>
+//     </ul>
+
+//     <li>
+//       Create a bridge between two clips and choose the relationship that best
+//       matches how you want their functionalities to interact.
+//     </li>
+//   </ol>
+//   `
+// },
+
 {
-  title: "Build a Bridge Between Clips",
+  title: "Undo or Redo an Action",
   description: `
   <ol>
     <li>
-      <strong>Goal:</strong> Define how two neighboring clips should relate to
-      each other when their functionalities need to interact.
+      <strong>Goal:</strong> Recover from a change you did not intend, or
+      restore an action that you previously undid.
     </li>
 
     <li>
-      Move your cursor between two components until the <strong>+</strong> button
-      appears, then click it to create a bridge between them.
+      Click <strong>Undo</strong> to reverse your most recent action.
     </li>
 
     <li>
-      Choose the type of relationship that best describes how the two clips
-      should work together:
+      If you change your mind, click <strong>Redo</strong> to restore the
+      action.
     </li>
 
-    <ul>
-      <li><strong>Compose</strong> — Integrate both functionalities into a combined behavior.</li>
-      <li><strong>Depend</strong> — Have one clip reuse functionality provided by the other.</li>
-      <li><strong>Coordinate</strong> — Define how shared behavior between the two clips should work together.</li>
-      <li><strong>Isolate</strong> — Keep changes in one clip from affecting the other.</li>
-      <li><strong>Resolve</strong> — Reconcile conflicting requirements between the two clips.</li>
-    </ul>
-
     <li>
-      Create a bridge between two clips and choose the relationship that best
-      matches how you want their functionalities to interact.
+      Try making a small change to the timeline, then use
+      <strong>Undo</strong> and <strong>Redo</strong> to move backward and
+      forward through that change.
     </li>
   </ol>
   `
 },
-
 ];
 
 
