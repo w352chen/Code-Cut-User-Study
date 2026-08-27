@@ -33,24 +33,49 @@ const SESSION_TASK_IDS = {
   task2: 'expense',
 };
 
+// const STEP_TITLES = [
+//   'Build Five Features',
+//   'Simplify a Feature',
+//   'Remove the Second Feature',
+//   'Remove Error Handling',
+//   'Add Explanatory Comments',
+//   'Explore an Alternative Direction',
+//   'Inspect a Feature',
+// ];
+
+// const STEP_BODIES = [
+//   '<p>Design and build the app with <strong>five</strong> features that you think would make it useful. Your five features should include functionality related to both the <strong>front end</strong> of the application and its <strong>underlying logic or data handling</strong>.</p>',
+//   '<p>Review the features you have built and choose <strong>one feature you are not fully satisfied with</strong>. Either <strong>simplify</strong> it by reducing unnecessary functionality, or <strong>enrich</strong> it by adding functionality that you think would make it more useful.</p>',
+//   '<p>Choose <strong>one feature you are not satisfied with</strong> and remove it from the application. Then propose and build a <strong>new feature</strong> that you think would be a better addition to the app.</p>',
+//   '<p>You notice that the generated implementation includes more error-handling code than you need for this prototype. Remove the error-handling code.</p>',
+//   '<p>You are preparing the project for another developer to review. Add more explanatory comments to the generated code so that it is easier to understand, without changing the application\'s behaviour.</p>',
+//   '<p>You are not sure that the direction you chose for one of the features is the best one. Explore an alternative direction for that feature while keeping the rest of the application unchanged.</p>',
+//   '<p><strong>Undo your most recent change</strong> to the application. Make sure that the work you completed before that change is preserved.</p>',
+// ];
 const STEP_TITLES = [
   'Build Five Features',
-  'Simplify a Feature',
-  'Remove the Second Feature',
-  'Remove Error Handling',
+  'Refine a Feature',
+  'Replace a Feature',
+  'Reduce Error Handling',
   'Add Explanatory Comments',
   'Explore an Alternative Direction',
-  'Inspect a Feature',
+  'Return to the Previous Direction',
 ];
 
 const STEP_BODIES = [
-  '<p>Design and build the app with <strong>five</strong> features that you think would make it useful. Your five features should include functionality related to both the <strong>front end</strong> of the application and its <strong>underlying logic or data handling</strong>. A <strong>feature</strong> is a distinct capability that supports a meaningful user goal; individual buttons, fields, or minor interactions do not count as separate features.</p>',
-  '<p>Choose one feature you have built that seems more complicated than necessary. Simplify it.</p>',
-  '<p>Remove the second feature you built from the application.</p>',
-  '<p>You notice that the generated implementation includes more error-handling code than you need for this prototype. Remove the error-handling code.</p>',
-  '<p>You are preparing the project for another developer to review. Add more explanatory comments to the generated code so that it is easier to understand, without changing the application\'s behaviour.</p>',
-  '<p>You are not sure that the direction you chose for the last feature is the best one. Explore an alternative direction for that feature while keeping the rest of the application unchanged.</p>',
-  '<p>You want to better understand how one of the features is implemented and how it appears in the application. Choose one feature and inspect it in more detail.</p>',
+  '<p>You have an initial idea for the application. Design and build it with <strong>five</strong> features that you think would make it useful. Your five features should include functionality related to both the <strong>front end</strong> of the application and its <strong>underlying logic or data handling</strong>.</p>',
+
+  '<p>After trying the application, you realize that <strong>one feature is not quite right</strong>. Choose a feature you are not fully satisfied with and refine it. You may either <strong>simplify</strong> it by reducing unnecessary functionality or <strong>enrich</strong> it by adding functionality that would make it more useful.</p>',
+
+  '<p>As the application develops, you decide that <strong>one of the existing features is no longer worth keeping</strong>. Remove a feature you are not satisfied with, then propose and build a <strong>new feature</strong> that you think would be a better addition to the application.</p>',
+
+  '<p>You are building an early prototype and notice that the generated implementation includes <strong>more error-handling code than you currently need</strong>. Reduce the error-handling code while keeping the intended functionality of the application unchanged.</p>',
+
+  '<p>You are preparing the project for <strong>another developer to review</strong>. Add more explanatory comments to the generated code so that it is easier to understand, without changing the application\'s behaviour.</p>',
+
+  '<p>While reviewing the application, you become <strong>uncertain about the direction of one feature</strong>. Explore an alternative direction for that feature while keeping the rest of the application unchanged.</p>',
+
+  '<p>After reviewing the alternative direction, you realize that <strong>it is not a better choice</strong>. Return to the direction you had before this exploration, while making sure that <strong>all work completed before you explored the alternative is preserved</strong>.</p>',
 ];
 
 // [

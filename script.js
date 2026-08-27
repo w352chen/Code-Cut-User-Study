@@ -360,7 +360,7 @@ const tasks = [
 },
 
 {
-  title: "Adjust Clip Settings",
+  title: "Adjust Clip Effects",
   description: `
   <ol>
     <li>
@@ -369,7 +369,7 @@ const tasks = [
     </li>
 
     <li>
-      Open <strong>Settings</strong> for a clip or a range of clips. You can adjust three implementation qualities:
+      Open <strong>Effects</strong> for a clip or a range of clips. You can adjust three implementation qualities:
     </li> 
 
     <ol>
@@ -392,7 +392,7 @@ const tasks = [
     </ol>
 
     <li>
-      Try changing these settings to see how they affect the implementation
+      Try changing these Effects to see how they affect the implementation
       generated for the clip.
     </li>
   `
