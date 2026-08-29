@@ -125,32 +125,32 @@ const tasks = [
     </ol>
     `
   },
-  {
-  title: "Review a Mockup",
-    description: `
-    <ol>
-      <li>
-        <strong>Goal:</strong> Preview what a feature may look like and how users
-        may interact with it before implementing it.
-      </li>
+  // {
+  // title: "Review a Mockup",
+  //   description: `
+  //   <ol>
+  //     <li>
+  //       <strong>Goal:</strong> Preview what a feature may look like and how users
+  //       may interact with it before implementing it.
+  //     </li>
 
-      <li>
-        Clips with a user interface display a <strong>mockup scene</strong>
-        showing a visual preview of the feature.
-      </li>
+  //     <li>
+  //       Clips with a user interface display a <strong>mockup scene</strong>
+  //       showing a visual preview of the feature.
+  //     </li>
 
-      <li>
-        Click the <strong>zoom-in button</strong> in the bottom-left corner of
-        the clip to inspect the mockup in more detail.
-      </li>
+  //     <li>
+  //       Click the <strong>zoom-in button</strong> in the bottom-left corner of
+  //       the clip to inspect the mockup in more detail.
+  //     </li>
 
-      <li>
-        Use the mockup to check whether the appearance and expected behaviour
-        match what you intended for the feature.
-      </li>
-    </ol>
-    `
-  },
+  //     <li>
+  //       Use the mockup to check whether the appearance and expected behaviour
+  //       match what you intended for the feature.
+  //     </li>
+  //   </ol>
+  //   `
+  // },
 
   {
     title: "Check the Implementation Plan",
