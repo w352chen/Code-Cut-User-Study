@@ -69,9 +69,9 @@ const STEP_BODIES = [
 
   '<p>As the application develops, you decide that <strong>one of the existing features is no longer worth keeping</strong>. Remove a feature you are not satisfied with, then propose and build a <strong>new feature</strong> that you think would be a better addition to the application.</p>',
 
-  '<p>You are building an early prototype and notice that the generated implementation includes <strong>more error-handling code than you currently need</strong>. Reduce the error-handling code while keeping the intended functionality of the application unchanged.</p>',
+  '<p>Choose <strong>one feature</strong> in the application. You notice that its generated implementation includes <strong>more error-handling code than you currently need</strong> for this early prototype. Reduce the error-handling code for that feature while keeping its intended functionality unchanged.</p>',
 
-  '<p>You are preparing the project for <strong>another developer to review</strong>. Add more explanatory comments to the generated code so that it is easier to understand, without changing the application\'s behaviour.</p>',
+  '<p>Choose <strong>one feature</strong> in the application and prepare its implementation for <strong>another developer to review</strong>. Add more explanatory comments to the generated code for that feature so that it is easier to understand, without changing its behaviour.</p>',
 
   '<p>While reviewing the application, you become <strong>uncertain about the direction of one feature</strong>. Explore an alternative direction for that feature while keeping the rest of the application unchanged.</p>',
 
